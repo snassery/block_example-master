@@ -9,6 +9,76 @@
  *
  * @ingroup block_example
  */
+
+
+
+function block_example_collapsiblock_init() {
+    //load the settings
+    global $theme;
+    $current_theme = $theme ? $theme : variable_get('theme_default', 'garland');
+    $collapsiblock_path = drupal_get_path('module', 'collapsiblock');
+    $theme_settings = variable_get(str_replace('/', '_', 'theme_' . $current_theme . '_settings'), array());
+    $theme_settings = array_merge(collapsiblock_default_settings(), $theme_settings, array());
+    drupal_add_js(array(
+        'collapsiblock' => array(
+            'blocks' => variable_get('collapsiblock_settings', array()),
+            'default_state' => variable_get('collapsiblock_default_state', 1),
+            'slide_type' => variable_get('collapsiblock_slide_type', 1),
+            'slide_speed' => variable_get('collapsiblock_slide_speed', 10),
+            'block_title' => $theme_settings['collapsiblock_title'],
+            'block' => $theme_settings['collapsiblock_block'],
+            'block_content' => $theme_settings['collapsiblock_content'],
+            )), array('type' => 'setting'
+        , 'scope' => JS_DEFAULT));
+}
+
+/**
+ * Implements hook_menu().
+ */
+function block_example_collapsiblock_menu() {
+  $items = array();
+
+  $items['admin/config/user-interface/collapsiblock'] = array(
+    'title' => 'Collapsiblock',
+    'description' => 'Configuration for collapsible blocks',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('collapsiblock_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+/**
+ * Admin settings.
+ */
+function block_example_collapsiblock_admin_settings($form, &$form_state) {
+  $form = array();
+  $form['collapsiblock_default_state'] = array(
+    '#type' => 'radios',
+    '#title' => t('Default block collapse behavior'),
+    '#options' => array(1 => t('None.'), 2 => t('Collapsible, expanded by default.'), 3 => t('Collapsible, collapsed by default.'), 4 => t('Collapsible, collapsed all the time.')),
+    '#default_value' => variable_get('collapsiblock_default_state', 1),
+  );
+  $form['collapsiblock_slide_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Default animation type'),
+    '#options' => array(1 => t('Slide'), 2 => t('Fade and slide')),
+    '#description' => t('Slide is the Drupal default while Fade and slide adds a nice fade effect.'),
+    '#default_value' => variable_get('collapsiblock_slide_type', 1),
+  );
+  $form['collapsiblock_slide_speed'] = array(
+    '#type' => 'select',
+    '#title' => t('Animation speed'),
+    '#options' => drupal_map_assoc(array('10000')),
+    '#description' => t('The animation speed in milliseconds.'),
+    '#default_value' => variable_get('collapsiblock_slide_speed', 10000),
+  );
+  $form['collapsiblock_help'] = array(
+    '#markup' => t('If collapsiblock doesn\'t work out of the box, you can force CSS selectors on <a href="!url">appearance settings</a>.', array('!url' => url('admin/appearance/settings'))),
+  );
+
 function block_example_uninstall() {
   variable_del('block_example_string');
 }
+

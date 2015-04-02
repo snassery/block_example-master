@@ -173,6 +173,13 @@ function block_example_block_save($delta = '', $edit = array()) {
   }
 }
 
+
+  
+  $form = system_settings_form($form);
+  return $form;
+}
+
+
 /**
  * Implements hook_block_view().
  *
