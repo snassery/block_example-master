@@ -60,21 +60,21 @@ function block_example_collapsiblock_admin_settings($form, &$form_state) {
     '#options' => array(1 => t('None.'), 2 => t('Collapsible, expanded by default.'), 3 => t('Collapsible, collapsed by default.'), 4 => t('Collapsible, collapsed all the time.')),
     '#default_value' => variable_get('block_example_collapsiblock_default_state', 1),
   );
-  $form['collapsiblock_slide_type'] = array(
+  $form['block_example_collapsiblock_slide_type'] = array(
     '#type' => 'radios',
     '#title' => t('Default animation type'),
     '#options' => array(1 => t('Slide'), 2 => t('Fade and slide')),
     '#description' => t('Slide is the Drupal default while Fade and slide adds a nice fade effect.'),
-    '#default_value' => variable_get('collapsiblock_slide_type', 1),
+    '#default_value' => variable_get('block_example_collapsiblock_slide_type', 1),
   );
-  $form['collapsiblock_slide_speed'] = array(
+  $form['block_example_collapsiblock_slide_speed'] = array(
     '#type' => 'select',
     '#title' => t('Animation speed'),
     '#options' => drupal_map_assoc(array('10000')),
     '#description' => t('The animation speed in milliseconds.'),
-    '#default_value' => variable_get('collapsiblock_slide_speed', 10000),
+    '#default_value' => variable_get('block_example_collapsiblock_slide_speed', 10000),
   );
-  $form['collapsiblock_help'] = array(
+  $form['block_example_collapsiblock_help'] = array(
     '#markup' => t('If collapsiblock doesn\'t work out of the box, you can force CSS selectors on <a href="!url">appearance settings</a>.', array('!url' => url('admin/appearance/settings'))),
   );
 
