@@ -179,6 +179,8 @@ function block_example_block_save($delta = '', $edit = array()) {
   return $form;
 }
 
+}
+
 
 /**
  * Implements hook_block_view().
