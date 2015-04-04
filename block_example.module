@@ -58,8 +58,13 @@ function block_date_timezone_user($op, &$edit, &$account, $category = NULL) {
 /** implement login */
 
 
+/** 
+  */
 
-function block_user($type, &$edit, &$user, $category = NULL) {
+
+
+
+/** function block_user($type, &$edit, &$user, $category = NULL) {
   switch ($type) {
     case 'view':
       $items['Last Login'] = array(
@@ -73,9 +78,28 @@ function block_user($type, &$edit, &$user, $category = NULL) {
       break;
 }
 }
+*/
 
 
 /**
+<script>
+function block_user_openWin() {
+    var myWindow = window.open("", "myWindow", "width=200, height=100");
+    myWindow.document.write("<p>This is 'myWindow'</p>");
+ $items['Last Login'] = array(
+        'title' => t('Last login'),
+        'value' => format_date($user->login,'small'), 
+        'timezone' => format_timezone($user->timezone_name, 'small'),
+        'class' => 'mymodule', 
+
+      );      
+      return array(t('History') => $items);
+      break;
+      }
+}
+</script>
+
+
  * Simple page function to explain what the block example is about.
  */
 function block_example_page() {
