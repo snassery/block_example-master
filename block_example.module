@@ -29,24 +29,6 @@ function block_example_menu() {
   return $items;
 }
 
-//* drupal collapse */
-
-drupal_add_library('system', 'drupal.collapse');
- 
-<fieldset class=" collapsible collapsed">
-  <legend><span class="fieldset-legend">More Info</span></legend>
-  <div class="fieldset-wrapper">
-    <h3>Content goes here</h3>
-    <p>
-    Lots of hidden text. 
-    Lots of hidden text. 
-    Lots of hidden text.
-    Lots of hidden text. 
-    Lots of hidden text.
-    </p>
-  </div>
-</fieldset>
-
 /** implement timezone */
 function block_date_timezone_user($op, &$edit, &$account, $category = NULL) {
   if (isset($account->uid) && $op == 'login' && variable_get('configurable_timezones', 1)) {
@@ -85,7 +67,7 @@ function block_user($type, &$edit, &$user, $category = NULL) {
         'value' => format_date($user->login,'small'), 
         'timezone' => format_timezone($user->timezone_name, 'small'),
         'class' => 'mymodule', 
-          
+
       );      
       return array(t('History') => $items);
       break;
@@ -192,7 +174,7 @@ function block_example_block_save($delta = '', $edit = array()) {
 }
 
 
-  
+
   $form = system_settings_form($form);
   return $form;
 }
@@ -311,9 +293,6 @@ function block_example_block_list_alter(&$blocks) {
  * hook by creating a new block whose title has the string 'uppercase' in it
  * (set as title through the UI).
  */
-
- 
-
 function block_example_block_view_alter(&$data, $block) {
   // We'll search for the string 'uppercase'.
   if ((!empty($block->title) && stristr($block->title, 'uppercase')) || (!empty($data['subject']) && stristr($data['subject'], 'uppercase'))) {
@@ -326,3 +305,4 @@ function block_example_block_view_alter(&$data, $block) {
 /**
  * @} End of "defgroup block_example".
  */
+
