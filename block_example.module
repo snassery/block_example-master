@@ -294,4 +294,3 @@ function block_example_block_list_alter(&$blocks) {
     }
   }
 }
- 
