@@ -1,4 +1,0 @@
-
-/** * Implements hook_uninstall(). * * @ingroup block_example */ drupal_add_js('misc/collapse.js');
-
-function block_example_uninstall() { variable_del('block_example_string'); }
