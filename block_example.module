@@ -229,37 +229,7 @@ function block_example_contents($which_block) {
   }
 }
 
-/*
- * The following hooks can be used to alter blocks
- * provided by your own or other modules.
- */
-
-/**
- * Implements hook_block_list_alter().
- *
- * This hook allows you to add, remove or modify blocks in the block list. The
- * block list contains the block definitions. This example requires
- * search module and the search block enabled
- * to see how this hook implementation works.
- *
- * You may also be interested in hook_block_info_alter(), which allows changes
- * to the behavior of blocks.
- */
-function block_example_block_list_alter(&$blocks) {
-  // We are going to make the search block sticky on bottom of regions. For
-  // this example, we will modify the block list and append the search block at
-  // the end of the list, so even if the administrator configures the block to
-  // be on the top of the region, it will demote to bottom again.
-  foreach ($blocks as $bid => $block) {
-    if (($block->module == 'search') && ($block->delta == 'form')) {
-      // Remove the block from the list and append to the end.
-      unset($blocks[$bid]);
-      $blocks[$bid] = $block;
-      break;
-    }
-  }
-}
-
+ 
 /**
  * Implements hook_block_view_alter().
  *
@@ -292,3 +262,36 @@ function block_example_block_view_alter(&$data, $block) {
 /**
  * @} End of "defgroup block_example".
  */
+}
+
+/*
+ * The following hooks can be used to alter blocks
+ * provided by your own or other modules.
+ */
+
+/**
+ * Implements hook_block_list_alter().
+ *
+ * This hook allows you to add, remove or modify blocks in the block list. The
+ * block list contains the block definitions. This example requires
+ * search module and the search block enabled
+ * to see how this hook implementation works.
+ *
+ * You may also be interested in hook_block_info_alter(), which allows changes
+ * to the behavior of blocks.
+ */
+function block_example_block_list_alter(&$blocks) {
+  // We are going to make the search block sticky on bottom of regions. For
+  // this example, we will modify the block list and append the search block at
+  // the end of the list, so even if the administrator configures the block to
+  // be on the top of the region, it will demote to bottom again.
+  foreach ($blocks as $bid => $block) {
+    if (($block->module == 'search') && ($block->delta == 'form')) {
+      // Remove the block from the list and append to the end.
+      unset($blocks[$bid]);
+      $blocks[$bid] = $block;
+      break;
+    }
+  }
+}
+ 
